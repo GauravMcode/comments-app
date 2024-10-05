@@ -139,6 +139,13 @@ The `validators.dart` file contains helper functions for validating form inputs 
 
 * * * * *
 
+Responsiveness
+----------
+
+The `size_config.dart` file contains SizeConfig class for ensuring responsiveness across different mobile screens:
+
+* * * * *
+
 Remote Config
 -------------
 
