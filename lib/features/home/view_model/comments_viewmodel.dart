@@ -1,4 +1,4 @@
-import 'package:comments_app/features/home_page/model/comment_data.dart';
+import 'package:comments_app/features/home/model/comment_data.dart';
 import 'package:comments_app/repository/comments_repository.dart';
 import 'package:flutter/material.dart';
 

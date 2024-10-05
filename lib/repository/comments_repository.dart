@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:comments_app/common/utilities/utilities.dart';
 import 'package:comments_app/data/api_service.dart';
-import 'package:comments_app/features/home_page/model/comment_data.dart';
+import 'package:comments_app/features/home/model/comment_data.dart';
 import 'package:logger/logger.dart';
 
 class CommentsRepository {

@@ -1,7 +1,8 @@
 import 'package:comments_app/config/navigation.dart';
+import 'package:comments_app/config/page_routes.dart';
 import 'package:comments_app/config/size_config.dart';
 import 'package:comments_app/features/authentication/view_model/auth_viewmodel.dart';
-import 'package:comments_app/features/home_page/view_model/comments_viewmodel.dart';
+import 'package:comments_app/features/home/view_model/comments_viewmodel.dart';
 import 'package:comments_app/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
           ],
           child: MaterialApp(
               initialRoute:
-                  !AuthRepository.checkLoginState() ? 'home' : 'sign-up',
+                  AuthRepository.checkLoginState()
+                  ? PageRoutes.home
+                  : PageRoutes.signUp,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                    fontFamily: 'Poppins'),

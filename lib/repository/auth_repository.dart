@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:comments_app/common/utilities/utilities.dart';
 import 'package:comments_app/features/authentication/model/auth_req.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
@@ -5,6 +7,7 @@ import 'package:logger/logger.dart';
 class AuthRepository {
   final logger = Logger();
   final _auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   static bool checkLoginState() {
     return FirebaseAuth.instance.currentUser != null;
@@ -15,6 +18,7 @@ class AuthRepository {
       final data = await _auth.createUserWithEmailAndPassword(
           email: req.email, password: req.password);
       await data.user?.updateDisplayName(req.name);
+      await saveUserData(req);
       return "Registration successful!";
     } on FirebaseAuthException catch (e) {
       logger.e(e);
@@ -31,6 +35,32 @@ class AuthRepository {
     } catch (e) {
       logger.e(e);
       return 'An unknown error occurred: $e';
+    }
+  }
+
+  saveUserData(AuthReq req) async {
+    try {
+      await users.add({'name': req.name, 'email': req.email});
+    } on FirebaseException catch (e) {
+      String message;
+
+      switch (e.code) {
+        case 'permission-denied':
+          message = 'You do not have permission to perform this operation.';
+          break;
+        case 'unavailable':
+          message =
+              'The service is currently unavailable. Please try again later.';
+          break;
+        case 'unknown':
+        default:
+          message = 'An unknown error occurred. Please try again.';
+      }
+      showToast(message);
+      rethrow;
+    } catch (e) {
+      logger.e(e);
+      rethrow;
     }
   }
 
@@ -59,5 +89,13 @@ class AuthRepository {
     } catch (e) {
       return 'An unknown error occurred: $e';
     }
+  }
+
+  static logOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  static User? getUserDetails() {
+    return FirebaseAuth.instance.currentUser;
   }
 }

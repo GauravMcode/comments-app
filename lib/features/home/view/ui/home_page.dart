@@ -1,8 +1,8 @@
 import 'package:comments_app/config/app_colors.dart';
+import 'package:comments_app/config/page_routes.dart';
 import 'package:comments_app/config/size_config.dart';
-import 'package:comments_app/main.dart';
-import 'package:comments_app/features/home_page/view/helpers/comment_card.dart';
-import 'package:comments_app/features/home_page/view_model/comments_viewmodel.dart';
+import 'package:comments_app/features/home/view/helpers/comment_card.dart';
+import 'package:comments_app/features/home/view_model/comments_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -23,17 +23,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  final w = SizeConfig.screenWidth;
+  final h = SizeConfig.screenHeight;
+
   @override
   Widget build(BuildContext context) {
-    final w = SizeConfig.screenWidth;
-    final h = SizeConfig.screenHeight;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kcPrimaryColor,
         title: const Text(
           "Comments",
-          style: TextStyle(color: kcWhite),
+          style: TextStyle(color: kcSecondaryColor),
         ),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(PageRoutes.profile);
+              },
+              icon: const Icon(
+                Icons.person,
+                color: kcSecondaryColor,
+              )),
+        ],
       ),
       body: SizedBox(
         width: w,

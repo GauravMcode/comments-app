@@ -29,7 +29,7 @@ class CustomFormField extends StatelessWidget {
   final double borderRadius = 10;
   final double contentPadding = 10;
   final Function? onChanged;
-  final Function? validator;
+  final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final bool? isMultiline;
   final TextInputType? keyboardType;
@@ -49,10 +49,7 @@ class CustomFormField extends StatelessWidget {
         autocorrect: true,
         controller: controller,
         validator: validator != null
-            ? (value) {
-                validator!();
-                return null;
-              }
+            ? validator!
             : (isRequired == true
                 ? (value) {
                     if (value == null || value.isEmpty) {
@@ -86,13 +83,10 @@ class CustomFormField extends StatelessWidget {
           hintStyle: hintTextStyle,
           labelStyle: isEnabled ? null : const TextStyle(color: Colors.white),
           label: label != null
-              ? Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    label!,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: kcBlack),
-                  ),
+              ? Text(
+                  label!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: kcBlack),
                 )
               : null,
           alignLabelWithHint: true,
