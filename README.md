@@ -56,8 +56,7 @@ Installation and Setup
 
     Copy code
 
-    `git clone https://github.com/your-repository/comments-app.git
-    cd comments-app`
+    `git clone https://github.com/GauravMcode/comments-app.git`
 
 2.  **Install dependencies:**
 
@@ -135,8 +134,8 @@ Validators
 
 The `validators.dart` file contains helper functions for validating form inputs such as:
 
--   Email validation
--   Password validation (minimum length, etc.)
+-   Email validation (email formatting)
+-   Password validation (minimum length - 6,special characters, uppercase, lowercase and digits.)
 
 * * * * *
 
