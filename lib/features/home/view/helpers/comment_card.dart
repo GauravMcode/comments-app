@@ -14,7 +14,7 @@ class CommentCard extends StatelessWidget {
     final w = SizeConfig.screenWidth!;
     final remoteConfig = FirebaseRemoteConfigService();
     return SizedBox(
-      width: w * 0.9,
+      width: w * 0.92,
       child: Card(
         elevation: 20,
         color: kcWhite,
@@ -36,6 +36,7 @@ class CommentCard extends StatelessWidget {
                 width: w * 0.03,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +48,7 @@ class CommentCard extends StatelessWidget {
                             color: kcSecondaryColorDark),
                       ),
                       SizedBox(
-                        width: w * 0.55,
+                        width: w * 0.53,
                         child: Text(commentData.name ?? "",
                             style: TextStyle(
                                 color: kcPrimaryColorDark,
@@ -65,7 +66,7 @@ class CommentCard extends StatelessWidget {
                             color: kcSecondaryColorDark),
                       ),
                       SizedBox(
-                        width: w * 0.55,
+                        width: w * 0.53,
                         child: Text(
                             maskEmail(
                                 commentData.email!, remoteConfig.maskEmail),
