@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kcSecondaryColor,
       appBar: AppBar(
         backgroundColor: kcPrimaryColor,
         title: const Text(
@@ -47,22 +48,27 @@ class _HomePageState extends State<HomePage> {
               )),
         ],
       ),
-      body: SizedBox(
-        width: w,
-        height: h,
-        child: Center(
-          child: context.watch<HomeViewModel>().loading
-              ? const CircularProgressIndicator()
-              : context.watch<HomeViewModel>().comments.isEmpty
-                  ? const Text("No data Found.")
-                  : Consumer<HomeViewModel>(
-                      builder: (context, viewModel, child) {
-                      return ListView.builder(
-                          itemCount: viewModel.comments.length,
-                          itemBuilder: (context, index) => CommentCard(
-                                commentData: viewModel.comments[index],
-                              ));
-                    }),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: w,
+          height: h,
+          child: Center(
+            child: context.watch<HomeViewModel>().loading
+                ? const CircularProgressIndicator()
+                : context.watch<HomeViewModel>().comments.isEmpty
+                    ? const Text("No data Found.")
+                    : Consumer<HomeViewModel>(
+                        builder: (context, viewModel, child) {
+                        return ListView.builder(
+                            itemCount: viewModel.comments.length,
+                            itemBuilder: (context, index) => Center(
+                                  child: CommentCard(
+                                    commentData: viewModel.comments[index],
+                                  ),
+                                ));
+                      }),
+          ),
         ),
       ),
     );

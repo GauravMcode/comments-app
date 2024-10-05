@@ -1,6 +1,7 @@
 import 'package:comments_app/config/navigation.dart';
 import 'package:comments_app/config/page_routes.dart';
 import 'package:comments_app/config/size_config.dart';
+import 'package:comments_app/data/remote_cofig_service.dart';
 import 'package:comments_app/features/authentication/view_model/auth_viewmodel.dart';
 import 'package:comments_app/features/home/view_model/comments_viewmodel.dart';
 import 'package:comments_app/repository/auth_repository.dart';
@@ -20,6 +21,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseRemoteConfigService().initialize();
   runApp(const MyApp());
 }
 
