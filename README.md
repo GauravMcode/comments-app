@@ -143,18 +143,10 @@ The `validators.dart` file contains helper functions for validating form inputs 
 Remote Config
 -------------
 
-The `remote_config_service.dart` file handles fetching and updating Firebase Remote Config values, specifically the `maskEmail` boolean, which toggles whether to display user emails on the comment cards.
+The `remote_config_service.dart` file handles fetching and updating Firebase Remote Config values, specifically the `maskEmail` boolean, which toggles whether to mask user emails on the comment cards.
 
 * * * * *
 
-Future Enhancements
--------------------
-
--   Implement password reset functionality.
--   Add more user-specific settings in the profile page.
--   Improve form validation with stronger password requirements.
-
-* * * * *
 
 Conclusion
 ----------
