@@ -1,16 +1,162 @@
-# comments_app
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Comments App
+============
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Comments App** is a Flutter application built using the MVVM architecture. It leverages the **Provider** state management system, **Firebase Authentication** for user authentication, **Cloud Firestore** to store user data, and **Remote Config** to manage a boolean feature flag (`maskEmail`). The app fetches comments from the API `https://jsonplaceholder.typicode.com/comments` and displays them as a list of cards.
+
+The app includes functionality for user login, sign-up, home page with comment cards, and a profile page to view user details.
+
+* * * * *
+
+Features
+--------
+
+-   **User Authentication**:
+    -   Login and Sign-up functionality using **Firebase Authentication**.
+    -   User data (name and email) is stored in **Firestore** upon successful registration.
+-   **Remote Config**:
+    -   A boolean flag `maskEmail` is fetched using **Firebase Remote Config**. It determines whether or not to mask user emails in the UI.
+-   **Data Fetching**:
+    -   Comments are fetched from the public API: `https://jsonplaceholder.typicode.com/comments`.
+    -   The comments are displayed as a list of cards, each card showing the commenter's name, email (conditioned by `maskEmail`), and the comment body.
+-   **Profile Management**:
+    -   Users can view their profile, including name and email, after logging in.
+
+* * * * *
+
+Folder Structure
+----------------
+
+The project follows a modular folder structure based on **MVVM architecture**:
+
+
+* * * * *
+
+Technology Stack
+----------------
+
+-   **State Management**: Provider
+-   **Firebase Authentication**: To manage user sign-up and login.
+-   **Cloud Firestore**: To store user information such as name and email.
+-   **Firebase Remote Config**: Used to manage a boolean flag (`maskEmail`) that alters the display of user emails.
+-   **API**: Data is fetched from the public API `https://jsonplaceholder.typicode.com/comments`.
+
+* * * * *
+
+Installation and Setup
+----------------------
+
+1.  **Clone the repository:**
+
+    bash
+
+    Copy code
+
+    `git clone https://github.com/your-repository/comments-app.git
+    cd comments-app`
+
+2.  **Install dependencies:**
+
+    Make sure you have Flutter and Dart installed. Then run:
+
+    bash
+
+    Copy code
+
+    `flutter pub get`
+
+3.  **Set up Firebase:**
+
+    -   Add your `google-services.json` for Android and `GoogleService-Info.plist` for iOS in their respective directories.
+    -   Make sure Firebase Authentication, Firestore, and Remote Config are enabled in your Firebase project.
+4.  **Run the app:**
+
+    bash
+
+    Copy code
+
+    `flutter run`
+
+* * * * *
+
+App Architecture
+----------------
+
+The app is structured using the **MVVM (Model-View-ViewModel)** architecture to promote separation of concerns, making the app more maintainable.
+
+-   **Model**: Contains data models, such as the user or comment model.
+-   **View**: Handles the UI, built with Flutter widgets.
+-   **ViewModel**: Manages the business logic, interacting with services and providing data to the view.
+
+* * * * *
+
+State Management
+----------------
+
+We are using **Provider** for state management, which allows us to bind the UI to the ViewModel effectively. For example:
+
+-   In the login page, we use `context.read<AuthViewModel>().login()` to call authentication methods.
+-   On the home page, we use `context.watch<CommentViewModel>()` to listen for changes in the comments list.
+
+* * * * *
+
+Firebase Integration
+--------------------
+
+-   **Authentication**: Firebase Authentication is used for login and sign-up functionality.
+-   **Firestore**: On user registration, their name and email are stored in Firestore.
+-   **Remote Config**: The app fetches a `maskEmail` flag from Firebase Remote Config, which controls whether to hide user email addresses in the comments list.
+
+* * * * *
+
+API Integration
+---------------
+
+The app fetches a list of comments from `https://jsonplaceholder.typicode.com/comments` and displays them as cards on the home page.
+
+* * * * *
+
+Screens
+-------
+
+-   **Login Page**: Allows users to log in with their email and password.
+-   **Sign-Up Page**: New users can sign up with their name, email, and password.
+-   **Home Page**: Displays a list of comment cards, fetching data from the public API.
+-   **Profile Page**: Displays the logged-in user's name and email.
+
+* * * * *
+
+Validators
+----------
+
+The `validators.dart` file contains helper functions for validating form inputs such as:
+
+-   Email validation
+-   Password validation (minimum length, etc.)
+
+* * * * *
+
+Remote Config
+-------------
+
+The `remote_config_service.dart` file handles fetching and updating Firebase Remote Config values, specifically the `maskEmail` boolean, which toggles whether to display user emails on the comment cards.
+
+* * * * *
+
+Future Enhancements
+-------------------
+
+-   Implement password reset functionality.
+-   Add more user-specific settings in the profile page.
+-   Improve form validation with stronger password requirements.
+
+* * * * *
+
+Conclusion
+----------
+
+This project demonstrates the use of Firebase services in a Flutter app, with a clean MVVM architecture and state management via Provider. It is a scalable structure that can be easily extended with more features in the future.
